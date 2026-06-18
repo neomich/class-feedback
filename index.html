@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Class Feedback</title>
+    <title>English Class Feedback</title>
     <style>
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: #f4f7f6;
             margin: 0;
-            padding: 1rem;
+            padding: 2rem 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -19,37 +19,76 @@
 
         .feedback-card {
             background: white;
-            padding: 2.5rem 2rem;
+            padding: 3rem 2rem;
             border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.05);
             width: 100%;
-            max-width: 550px;
+            max-width: 650px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
             text-align: center;
         }
 
-        h2 {
-            color: #2c3e50;
-            font-size: 1.5rem;
-            margin-top: 0;
-            margin-bottom: 2rem;
+        .intro-p {
+            color: #000000; /* Plain Black */
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-align: justify;
         }
 
+        .intro-bold {
+            font-weight: bold;
+            color: #000000; /* Plain Black */
+            display: block;
+            margin-bottom: 3rem;
+            text-align: center;
+            line-height: 1.5;
+            background: #ebf5fb;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .form-section {
+            margin-bottom: 3rem;
+        }
+
+        .context-note {
+            color: #000000; /* Plain Black */
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: #3498db; /* Friendly Blue */
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            display: block;
+            line-height: 1.4;
+        }
+
+        /* --- 0-10 Scale Styling --- */
         .scale-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: relative;
-            margin-bottom: 2.5rem;
-            padding: 0 10px;
+            margin-bottom: 0.5rem;
         }
 
-        /* Connecting line behind dots */
         .scale-container::before {
             content: '';
             position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
+            top: 18px;
+            left: 15px;
+            right: 15px;
             height: 4px;
             background-color: #e0e0e0;
             z-index: 1;
@@ -66,8 +105,8 @@
         }
 
         .dot {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background-color: white;
             border: 3px solid #e0e0e0;
@@ -75,11 +114,10 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: #7f8c8d;
             transition: all 0.2s ease;
             box-sizing: border-box;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .dot-wrapper:hover .dot {
@@ -92,48 +130,68 @@
             background-color: #3498db;
             border-color: #3498db;
             color: white;
-            transform: scale(1.15);
-            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
         }
 
-        .labels {
-            display: flex;
-            justify-content: space-between;
-            color: #95a5a6;
+        .custom-label {
             font-size: 0.85rem;
-            margin-top: -1.5rem;
-            margin-bottom: 2.5rem;
-            padding: 0 15px;
+            color: #e67e22;
+            font-style: italic;
+            margin-top: 0.5rem;
+            text-align: right;
+            display: block;
             font-weight: 500;
         }
 
-        .btn-container {
-            height: 50px; /* Prevents layout shifting when button appears */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* --- Textarea Styling --- */
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            box-sizing: border-box;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        textarea:focus {
+            border-color: #3498db;
+        }
+
+        .char-counter {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-top: 0.25rem;
+        }
+
+        /* --- Footer & Button --- */
+        .footer-text {
+            color: #000000;
+            font-weight: 500;
+            text-align: center;
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
         }
 
         button {
             background-color: #2ecc71;
             color: white;
             border: none;
-            padding: 0.8rem 2.5rem;
-            font-size: 1.1rem;
+            padding: 1rem;
+            font-size: 1.15rem;
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
+            width: 100%;
             box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-        }
-
-        button.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+            transition: all 0.2s ease;
         }
 
         button:hover {
@@ -141,77 +199,163 @@
             box-shadow: 0 6px 15px rgba(46, 204, 113, 0.3);
         }
 
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
         #statusMessage {
             margin-top: 1.5rem;
             font-weight: 600;
             font-size: 1rem;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
 <div class="feedback-card" id="cardContent">
-    <h2>Do you like our English classes?</h2>
-    
-    <div class="scale-container" id="scale">
-        <!-- Dots 0 to 10 dynamically generated by JS -->
+    <h1>Thank you for attending our English classes! 😊</h1>
+    <p class="intro-p">
+        Please consider giving me some feedback by answering a few questions. You can be 100% honest, as all results are completely anonymous and I cannot see who sent the feedback. This questionnaire is sent to all of my students, so my only goal is to find areas for improvement to deliver a better class for you, rather than to track down haters.
+    </p>
+    <span class="intro-bold">All questions ask for a grade from 0 to 10, with 0 being the worst/sad/clueless and 10 being the best/super happy/absolutely sure.</span>
+
+    <div class="form-section" data-qnum="1" data-text="How happy are you with the vocabulary teaching in our classes?">
+        <span class="question-text">1. How happy are you with the vocabulary teaching in our classes?</span>
+        <div class="scale-container"></div>
     </div>
 
-    <div class="labels">
-        <span>Not at all</span>
-        <span>Absolutely!</span>
+    <div class="form-section" data-qnum="2" data-text="How happy are you with the grammar teaching in our classes?">
+        <span class="question-text">2. How happy are you with the grammar teaching in our classes?</span>
+        <div class="scale-container"></div>
     </div>
 
-    <div class="btn-container">
-        <button id="sendBtn">Send Results</button>
+    <div class="form-section" data-qnum="3" data-text="How happy are you with the use of audio/video in our classes?">
+        <span class="question-text">3. How happy are you with the use of audio/video in our classes?</span>
+        <div class="scale-container"></div>
     </div>
 
+    <div class="form-section" data-qnum="4" data-text="How happy are you with the visual aspect of the materials provided?">
+        <span class="question-text">4. How happy are you with the visual aspect of the materials provided?</span>
+        <div class="scale-container"></div>
+    </div>
+
+    <div class="form-section" data-qnum="5" data-text="How happy are you with the speaking practice in our classes?">
+        <span class="question-text">5. How happy are you with the speaking practice in our classes?</span>
+        <div class="scale-container"></div>
+    </div>
+
+    <div class="form-section" data-qnum="6" data-text="How do you feel about some of the audio, text, and images being generated by AI?">
+        <div class="context-note">You may have noticed I use AI to assist me in preparing the lesson plans.</div>
+        <span class="question-text">6. How do you feel about some of the audio, text, and images being generated by AI?</span>
+        <div class="scale-container"></div>
+    </div>
+
+    <div class="form-section" data-qnum="7" data-text="How do you feel about my sense of humor? Do you find it annoying?">
+        <div class="context-note">You know me, and you know my sense of humor.</div>
+        <span class="question-text">7. How do you feel about my sense of humor? Do you find it annoying?</span>
+        <div class="scale-container"></div>
+        <span class="custom-label">10 = YES, absolutely! Cut this bullshit, Alex, and do your job!</span>
+    </div>
+
+    <div class="form-section" data-qnum="8" data-text="How do you feel about the choice of topics in our classes?">
+        <div class="context-note">I'm always on the lookout for interesting topics. My intention is not only for you to practice the language but also to learn something new about the world we live in.</div>
+        <span class="question-text">8. How do you feel about the choice of topics in our classes?</span>
+        <div class="scale-container"></div>
+    </div>
+
+    <div class="form-section" data-qnum="9" data-text="Do you wish for me to give you homework after each class?">
+        <div class="context-note">Oh yes, the fucking homework!</div>
+        <span class="question-text">9. Do you wish for me to give you homework after each class?</span>
+        <div class="scale-container"></div>
+        <span class="custom-label">10 = YES! The more HW I get, the bigger my procrastination ego grows.</span>
+    </div>
+
+    <div class="form-section">
+        <div class="context-note">Leave a note for me—anything you feel like saying. (Again, your feedback is anonymous, and any note on how to improve will be highly appreciated.)</div>
+        <span class="question-text">10. Your thoughts/suggestions:</span>
+        <textarea id="noteField" maxlength="1000" placeholder="Type your note here..."></textarea>
+        <div class="char-counter"><span id="charCount">0</span>/1000 characters</div>
+    </div>
+
+    <p class="footer-text">And lastly, thank you for your passion and loyalty! And for the feedback you just gave me! 😉</p>
+
+    <button id="submitBtn">Send Feedback</button>
     <div id="statusMessage"></div>
 </div>
 
 <script>
     const TELEGRAM_CHAT_ID = '1385220815';
     const TELEGRAM_BOT_TOKEN = '7316734712:AAH6nwcCUtvqFCDDO-1Sx_xHtxsvYuQ5O54';
-    
-    const scaleContainer = document.getElementById('scale');
-    const sendBtn = document.getElementById('sendBtn');
+
+    // Build the 0-10 dynamic scales for questions 1 through 9
+    const scaleContainers = document.querySelectorAll('.scale-container');
+    const answers = {};
+
+    scaleContainers.forEach(container => {
+        const section = container.closest('.form-section');
+        const qNum = section.dataset.qnum;
+        answers[qNum] = null; // init tracking
+
+        for (let i = 0; i <= 10; i++) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'dot-wrapper';
+            wrapper.dataset.value = i;
+
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            dot.textContent = i;
+
+            wrapper.appendChild(dot);
+            container.appendChild(wrapper);
+
+            wrapper.addEventListener('click', function() {
+                container.querySelectorAll('.dot-wrapper').forEach(el => el.classList.remove('selected'));
+                this.classList.add('selected');
+                answers[qNum] = this.dataset.value;
+            });
+        }
+    });
+
+    // Character Counter logic
+    const textarea = document.getElementById('noteField');
+    const charCountSpan = document.getElementById('charCount');
+    textarea.addEventListener('input', () => {
+        charCountSpan.textContent = textarea.value.length;
+    });
+
+    // Submit Logic
+    const submitBtn = document.getElementById('submitBtn');
     const statusDiv = document.getElementById('statusMessage');
-    let selectedValue = null;
 
-    // 1. Generate the 0-10 scale dots
-    for (let i = 0; i <= 10; i++) {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'dot-wrapper';
-        wrapper.dataset.value = i;
+    submitBtn.addEventListener('click', function() {
+        // Verify all 9 quantitative questions have values
+        for (let i = 1; i <= 9; i++) {
+            if (answers[i] === null) {
+                statusDiv.style.color = '#e74c3c';
+                statusDiv.textContent = `Please complete Question ${i} before submitting.`;
+                return;
+            }
+        }
 
-        const dot = document.createElement('div');
-        dot.className = 'dot';
-        dot.textContent = i;
+        const noteText = textarea.value.trim() || 'None provided';
+        
+        // Assemble clean message format matching request
+        let message = `📝 *New Comprehensive Feedback Summary*\n\n`;
+        for (let i = 1; i <= 9; i++) {
+            const section = document.querySelector(`.form-section[data-qnum="${i}"]`);
+            const qText = section.dataset.text;
+            message += `${i}. ${qText} *(${answers[i]}/10)*\n`;
+        }
+        message += `\n10. Note to teacher:\n"${noteText}"`;
 
-        wrapper.appendChild(dot);
-        scaleContainer.appendChild(wrapper);
-
-        // Handle dot selection
-        wrapper.addEventListener('click', function() {
-            document.querySelectorAll('.dot-wrapper').forEach(el => el.classList.remove('selected'));
-            this.classList.add('selected');
-            selectedValue = this.dataset.value;
-            
-            // Reveal the send button smoothly
-            sendBtn.classList.add('show');
-        });
-    }
-
-    // 2. Handle data submission to Telegram
-    sendBtn.addEventListener('click', function() {
-        if (selectedValue === null) return;
-
-        const message = `📊 *New Class Feedback*\n\n*Score:* ${selectedValue} / 10`;
         const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
 
-        sendBtn.disabled = true;
+        submitBtn.disabled = true;
         statusDiv.style.color = '#7f8c8d';
-        statusDiv.textContent = 'Sending...';
+        statusDiv.textContent = 'Sending feedback anonymously...';
 
         fetch(url, {
             method: 'POST',
@@ -225,23 +369,22 @@
         .then(response => {
             if (response.ok) {
                 statusDiv.style.color = '#2ecc71';
-                statusDiv.textContent = 'Thank you! Your feedback has been sent.';
+                statusDiv.textContent = 'Thank you! Your choices have been dispatched securely.';
                 
-                // Optional: Hide form content after successful submission
                 setTimeout(() => {
                     document.getElementById('cardContent').innerHTML = `
-                        <h2 style="color: #2ecc71; margin-bottom: 0;">✓ Feedback Submitted</h2>
-                        <p style="color: #7f8c8d; margin-top: 10px;">Have a great day!</p>
+                        <h2 style="color: #2ecc71; text-align: center; margin-bottom: 10px;">✓ Form Dispatched Successfully</h2>
+                        <p style="color: #7f8c8d; text-align: center; margin-top: 0;">Thank you for helping me deliver better lessons. Have a wonderful day!</p>
                     `;
                 }, 1000);
             } else {
-                throw new Error('Telegram API Error');
+                throw new Error('API dispatch error');
             }
         })
         .catch(error => {
             statusDiv.style.color = '#e74c3c';
-            statusDiv.textContent = 'Error sending feedback. Please try again.';
-            sendBtn.disabled = false;
+            statusDiv.textContent = 'Connection failure. Please try again.';
+            submitBtn.disabled = false;
             console.error(error);
         });
     });
